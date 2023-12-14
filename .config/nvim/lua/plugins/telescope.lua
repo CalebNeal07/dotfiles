@@ -6,24 +6,21 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: plugins/colorscheme.lua
--- Description: Colorscheme config
+-- File: plugins/telescope.lua
+-- Description: nvim-telescope config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-return { {
-  -- Rose-pine - Soho vibes for Neovim
-  "rose-pine/neovim",
-  name = "rose-pine",
-  opts = {
-    disable_background = true,
-    dark_variant = "main"
-  }
-}, {
-  -- Github - Github"s Neovim themes
-  "projekt0n/github-nvim-theme",
-  lazy = true
-}, {
-  -- Tokyonight- A clean, dark Neovim theme written in Lua, with support for lsp,
-  -- treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish.
-  "folke/tokyonight.nvim",
-  lazy = true
-} }
+return {{
+    -- Telescope
+    -- Find, Filter, Preview, Pick. All lua, all the time.
+    "nvim-telescope/telescope.nvim",
+    dependencies = {"nvim-lua/plenary.nvim", {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make"
+    }},
+    config = function(_)
+        require("telescope").setup()
+        -- To get fzf loaded and working with telescope, you need to call
+        -- load_extension, somewhere after setup function:
+        require("telescope").load_extension("fzf")
+    end
+}}

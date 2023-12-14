@@ -6,24 +6,18 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: plugins/colorscheme.lua
--- Description: Colorscheme config
+-- File: plugins/colorizer.lua
+-- Description: nvim-colorizer config
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-return { {
-  -- Rose-pine - Soho vibes for Neovim
-  "rose-pine/neovim",
-  name = "rose-pine",
-  opts = {
-    disable_background = true,
-    dark_variant = "main"
-  }
-}, {
-  -- Github - Github"s Neovim themes
-  "projekt0n/github-nvim-theme",
-  lazy = true
-}, {
-  -- Tokyonight- A clean, dark Neovim theme written in Lua, with support for lsp,
-  -- treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish.
-  "folke/tokyonight.nvim",
-  lazy = true
-} }
+return { -- colorizer
+{
+    "norcalli/nvim-colorizer.lua",
+    config = function(_)
+        require("colorizer").setup()
+
+        -- execute colorizer as soon as possible
+        vim.defer_fn(function()
+            require("colorizer").attach_to_buffer(0)
+        end, 0)
+    end
+}}

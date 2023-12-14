@@ -6,24 +6,18 @@
 -- ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 -- ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 --
--- File: plugins/colorscheme.lua
--- Description: Colorscheme config
+-- File: plugins/neoterm.lua
+-- Description: Floating terminal configs
 -- Author: Kien Nguyen-Tuan <kiennt2609@gmail.com>
-return { {
-  -- Rose-pine - Soho vibes for Neovim
-  "rose-pine/neovim",
-  name = "rose-pine",
-  opts = {
-    disable_background = true,
-    dark_variant = "main"
-  }
-}, {
-  -- Github - Github"s Neovim themes
-  "projekt0n/github-nvim-theme",
-  lazy = true
-}, {
-  -- Tokyonight- A clean, dark Neovim theme written in Lua, with support for lsp,
-  -- treesitter and lots of plugins. Includes additional themes for Kitty, Alacritty, iTerm and Fish.
-  "folke/tokyonight.nvim",
-  lazy = true
-} }
+return {{
+    -- Floating terminal
+    "itmecho/neoterm.nvim",
+    opts = {
+        clear_on_run = true, -- run clear command before user specified commands
+        mode = "horizontal", -- vertical/horizontal/fullscreen
+        noinsert = false -- disable entering insert mode when opening the neoterm window
+    },
+    config = function(_, opts)
+        require("neoterm").setup(opts)
+    end
+}}
